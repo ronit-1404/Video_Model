@@ -10,10 +10,18 @@ sys.path.insert(0, src_path)
 try:
     import cv2
     cv2_available = True
-except ImportError:
+    st.success(f"✅ OpenCV version {cv2.__version__} loaded successfully!")
+except ImportError as e:
     cv2_available = False
-    st.error("OpenCV (cv2) is not available. Please check your requirements.txt file includes 'opencv-python-headless'")
-    st.info("Make sure requirements.txt is in your repository root directory")
+    st.error("❌ OpenCV (cv2) is not available!")
+    st.error(f"Import error details: {str(e)}")
+    st.info("📝 Troubleshooting steps:")
+    st.markdown("""
+    1. Make sure `requirements.txt` includes `opencv-python-headless==4.8.1.78`
+    2. Make sure `packages.txt` includes system dependencies
+    3. Try redeploying your app on Streamlit Cloud
+    4. Check that all files are in your repository root directory
+    """)
     st.stop()
 
 try:
