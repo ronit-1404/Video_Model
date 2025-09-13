@@ -6,6 +6,16 @@ import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, current_dir)
 
+# Test cv2 availability first
+try:
+    import cv2
+    cv2_available = True
+except ImportError:
+    cv2_available = False
+    st.error("OpenCV (cv2) is not available. Please check your requirements.txt file includes 'opencv-python-headless'")
+    st.info("Make sure requirements.txt is in your repository root directory")
+    st.stop()
+
 try:
     from components.sidebar import render_sidebar
     from components.main_content import render_main_content
