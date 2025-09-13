@@ -15,13 +15,32 @@ except ImportError as e:
     cv2_available = False
     st.error("❌ OpenCV (cv2) is not available!")
     st.error(f"Import error details: {str(e)}")
+    
+    # Additional debugging information
+    import sys, os
+    st.write("**Debug Information:**")
+    st.write(f"- Python version: {sys.version}")
+    st.write(f"- Current directory: {os.getcwd()}")
+    st.write(f"- Python path: {sys.path[:3]}...")  # Show first 3 entries
+    
+    # Check if files exist
+    files_to_check = ["requirements.txt", "packages.txt"]
+    for file in files_to_check:
+        if os.path.exists(file):
+            st.write(f"- ✅ {file} exists")
+        else:
+            st.write(f"- ❌ {file} missing")
+    
     st.info("📝 Troubleshooting steps:")
     st.markdown("""
     1. Make sure `requirements.txt` includes `opencv-python-headless==4.8.1.78`
-    2. Make sure `packages.txt` includes system dependencies
-    3. Try redeploying your app on Streamlit Cloud
-    4. Check that all files are in your repository root directory
+    2. Make sure `packages.txt` includes system dependencies  
+    3. Try **redeploying** your app on Streamlit Cloud (clear cache)
+    4. Check that all files are in your repository **root directory**
+    5. Run the debug app: `debug_opencv.py` for detailed diagnostics
     """)
+    
+    st.warning("🔧 **For Streamlit Cloud**: Try clicking 'Reboot app' in the app menu to clear cache.")
     st.stop()
 
 try:
